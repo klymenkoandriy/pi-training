@@ -14,3 +14,10 @@
     You can add your own plugin in the 'class-loader-demo\plugin-manager\lib\plugin' folder.
     
     If you add or remove plugins (jar files) in runtime, you should perform the 'refresh' command.
+
+- **4. Plugin requirements.**
+
+    1. Jar file must contain software.sigma.klym.ConverterPlugin class
+                which implements plugin-api:software.sigma.klym.Converter interface.
+
+    2. Manifest must contain a 'PluginName' entry.

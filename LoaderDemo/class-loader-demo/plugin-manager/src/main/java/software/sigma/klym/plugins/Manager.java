@@ -74,7 +74,6 @@ public class Manager {
             loadedConverter = null;
             loadedPlugin.setLoaded(false);
             loadedPlugin = null;
-            System.gc();
         } else {
             System.out.println("\nThere are no loaded plugins");
         }
