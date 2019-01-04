@@ -1,6 +1,7 @@
 package software.sigma.klym.bank;
 
 import software.sigma.klym.exceptions.DepositException;
+import software.sigma.klym.exceptions.InsufficientException;
 import software.sigma.klym.exceptions.WithdrawException;
 
 public class Account {
@@ -24,13 +25,17 @@ public class Account {
         return balance;
     }
 
-    public void withdraw(int bal) throws WithdrawException{
+    public void withdraw(int amount) throws WithdrawException, InsufficientException{
+        if (amount > balance) {
+            throw new InsufficientException();
+        }
+        
         if ((int) (Math.random() * 100 / ERROR_CHANCE) == 0) {
             System.out.println(">>> throw exception");
             throw new WithdrawException();
         }
 
-        balance = balance - bal;
+        balance = balance - amount;
     }
 
     public void deposit(int bal) throws DepositException{

@@ -7,6 +7,7 @@ import java.util.concurrent.locks.ReentrantLock;
 import java.util.stream.IntStream;
 
 import software.sigma.klym.exceptions.DepositException;
+import software.sigma.klym.exceptions.InsufficientException;
 import software.sigma.klym.exceptions.WithdrawException;
 
 public class Bank {
@@ -75,11 +76,8 @@ public class Bank {
             return;
         }
 
-        if (amount <= fromAccount.getBalance()) {
-        	transfer(fromAccount, toAccount, amount);
-        } else {
-            System.out.printf(INSUFFICIENT_FORMAT, threadName, fromAccount, amount);
-        }
+        transfer(fromAccount, toAccount, amount);
+
     }
 
     private void transfer(Account fromAccount, Account toAccount, int amount) {
@@ -87,13 +85,13 @@ public class Bank {
 
         if (!withdraw(fromAccount, amount)) {
             return;
-        };
+        }
 
         if (!deposit(toAccount, amount)) {
             System.out.printf(TRY_ROLLBACK_FORMAT, threadName, amount, fromAccount);
             while(!withdraw(fromAccount, -amount));
             return;
-        };
+        }
 
         System.out.printf(TRANSFERED_FORMAT, threadName, amount, fromAccount, toAccount);
     }
@@ -106,7 +104,10 @@ public class Bank {
         } catch (WithdrawException e) {
             System.out.printf(WITHDRAW_ERROR_FORMAT, threadName, amount, fromAccount);
             return false;
-        }
+        } catch (InsufficientException e) {
+            System.out.printf(INSUFFICIENT_FORMAT, threadName, fromAccount, amount);
+            return false;
+        } 
     }
     
     private boolean deposit(Account toAccount, int amount) {
