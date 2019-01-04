@@ -1,4 +1,4 @@
-package software.sigma.klym;
+package software.sigma.klym.bank;
 
 public class Transaction implements Runnable{
 
