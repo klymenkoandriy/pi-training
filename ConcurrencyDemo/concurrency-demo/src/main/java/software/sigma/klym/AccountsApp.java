@@ -18,7 +18,7 @@ public class AccountsApp {
         
         randomTransfers(bank, numTransactions);
         
-        Thread.sleep(1000);
+        Thread.sleep(Transaction.MAX_TIME + 1000);
         printTotalBalance(bank.getTotal());
         printBy();
     }
@@ -60,7 +60,6 @@ public class AccountsApp {
 
             Thread t = new Thread(new Transaction(bank, fromAccount, toAccount, amount));
             t.start();
-            Thread.sleep(50);
         }
 
     }

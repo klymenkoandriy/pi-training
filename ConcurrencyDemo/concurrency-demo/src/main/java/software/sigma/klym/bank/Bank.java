@@ -54,6 +54,7 @@ public class Bank {
 
     public void transfer(int from, int to, int amount) {
         bankLock.lock();
+        
         threadName = Thread.currentThread().getName();
         try {
             performTransfer(from, to, amount);

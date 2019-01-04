@@ -6,7 +6,7 @@ import software.sigma.klym.exceptions.WithdrawException;
 
 public class Account {
 
-    private static final int ERROR_CHANCE = 5;
+    private static final int ERROR_CHANCE = 20;
 
     private final int accountId;
 
@@ -38,13 +38,13 @@ public class Account {
         balance = balance - amount;
     }
 
-    public void deposit(int bal) throws DepositException{
+    public void deposit(int amount) throws DepositException{
         if ((int) (Math.random() * 100 / ERROR_CHANCE) == 0) {
             System.out.println(">>> throw exception");
             throw new DepositException();
         }
 
-        balance = balance + bal;
+        balance = balance + amount;
     }
 
     public int getId() {
