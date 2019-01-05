@@ -12,11 +12,11 @@ public class Account {
 
     private int balance= 100;
 
-    public Account(int id) {
+    Account(int id) {
         this.accountId = id;
     }
 
-    public Account(int id, int balance) {
+    Account(int id, int balance) {
         this.accountId = id;
         this.balance = balance;
     }
@@ -25,7 +25,7 @@ public class Account {
         return balance;
     }
 
-    public void withdraw(int amount) throws WithdrawException, InsufficientException{
+    void withdraw(int amount) throws WithdrawException, InsufficientException{
         if (amount > balance) {
             throw new InsufficientException();
         }
@@ -38,7 +38,7 @@ public class Account {
         balance = balance - amount;
     }
 
-    public void deposit(int amount) throws DepositException{
+    void deposit(int amount) throws DepositException{
         if ((int) (Math.random() * 100 / ERROR_CHANCE) == 0) {
             System.out.println(">>> throw exception");
             throw new DepositException();
@@ -47,7 +47,7 @@ public class Account {
         balance = balance + amount;
     }
 
-    public int getId() {
+    int getId() {
         return accountId;
     }
 
