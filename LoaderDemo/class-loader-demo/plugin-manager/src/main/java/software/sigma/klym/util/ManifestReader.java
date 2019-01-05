@@ -12,13 +12,20 @@ public class ManifestReader extends JarInputStream {
     }
 
     public static String getPluginName(String pathToPlugin) {
+        return readAttribute(pathToPlugin, "PluginName");
+    }
+
+    public static String getPluginClassName(String pathToPlugin) {
+        return readAttribute(pathToPlugin, "PluginClass");
+    }
+
+    private static String readAttribute(String pathToPlugin, String attributeName) {
         try (JarInputStream jis = new JarInputStream(new FileInputStream(pathToPlugin)) ){
-            String name = jis.getManifest().getMainAttributes().getValue("PluginName");
+            String name = jis.getManifest().getMainAttributes().getValue(attributeName);
             return name;
         }
         catch (IOException e) {
-            throw new RuntimeException("Cand read plugin name.");
+            throw new RuntimeException("Can't read attribute '" + attributeName + "' from Manifest.");
         }
     }
-
 }

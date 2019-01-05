@@ -4,12 +4,15 @@ public class Plugin {
 
     private String pluginName;
 
+    private String pluginClass;
+
     private String jarFileName;
 
     private boolean loaded;
 
-    public Plugin(String pluginName, String jarFileName) {
+    public Plugin(String pluginName, String pluginClass, String jarFileName) {
         this.pluginName = pluginName;
+        this.pluginClass = pluginClass;
         this.jarFileName = jarFileName;
         loaded = false;
     }
@@ -28,6 +31,14 @@ public class Plugin {
 
     public void setJarFileName(String jarFileName) {
         this.jarFileName = jarFileName;
+    }
+
+    public String getPluginClass() {
+        return pluginClass;
+    }
+
+    public void setPluginClass(String pluginClass) {
+        this.pluginClass = pluginClass;
     }
 
     public boolean isLoaded() {

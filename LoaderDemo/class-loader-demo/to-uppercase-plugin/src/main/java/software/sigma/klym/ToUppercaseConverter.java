@@ -1,8 +1,8 @@
 package software.sigma.klym;
 
-public class ConverterPlugin implements Converter {
+public class ToUppercaseConverter implements Converter {
 
-    public ConverterPlugin() {
+    public ToUppercaseConverter() {
         System.out.println("    uppercase Converter created...");
     }
 

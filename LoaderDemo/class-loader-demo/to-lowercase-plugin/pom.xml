@@ -5,7 +5,7 @@
     <parent>
         <artifactId>class-loader-demo</artifactId>
         <groupId>software.sigma.klym</groupId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>0.0.2-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -28,6 +28,7 @@
                     <archive>
                         <manifestEntries>
                             <PluginName>${artifactId}</PluginName>
+                            <PluginClass>software.sigma.klym.ToLowercaseConverter</PluginClass>
                         </manifestEntries>
                     </archive>
                 </configuration>

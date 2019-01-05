@@ -39,7 +39,6 @@ public class PluginLoader extends ClassLoader {
 
         in.close();
 
-
         return bytes;
     }
 }

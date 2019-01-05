@@ -12,7 +12,6 @@ public class Manager {
 
     private static final String CURRENT_PATH = System.getProperty("user.dir").replace('\\', '/') + "/";
     private static final String LIB_PATH = CURRENT_PATH + "/plugin-manager/lib/plugin/";
-    private static final String PLUGIN_CLASS_NAME = "software.sigma.klym.ConverterPlugin";
 
     private static List<Plugin> availablePlugins = new ArrayList<>();
     private static Plugin loadedPlugin;
@@ -29,7 +28,8 @@ public class Manager {
                 String fileName = file.getName();
                 fileNames.add(fileName);
                 String pluginName = ManifestReader.getPluginName(LIB_PATH + fileName);
-                Plugin plugin = new Plugin(pluginName, fileName);
+                String pluginClass = ManifestReader.getPluginClassName(LIB_PATH + fileName);
+                Plugin plugin = new Plugin(pluginName, pluginClass, fileName);
                 addPlugin(plugin);
             }
         }
@@ -64,7 +64,7 @@ public class Manager {
 
         loadedPlugin = availablePlugins.get(i-1);
         System.out.println(String.format("-- Load plugin '%s'.", loadedPlugin.getPluginName()));
-        loadPluginFromJar(loadedPlugin.getJarFileName());
+        loadPluginFromJar(loadedPlugin.getJarFileName(), loadedPlugin.getPluginClass());
         loadedPlugin.setLoaded(true);
     }
 
@@ -88,12 +88,12 @@ public class Manager {
         }
     }
 
-    public static void loadPluginFromJar(String jarFileName) {
+    public static void loadPluginFromJar(String jarFileName, String className) {
         String pathToJar = LIB_PATH + jarFileName;
 
         PluginLoader loader = new PluginLoader(pathToJar, ClassLoader.getSystemClassLoader());
         try {
-            Class clazz = loader.loadClass(PLUGIN_CLASS_NAME);
+            Class clazz = loader.loadClass(className);
             loadedConverter = (Converter) clazz.newInstance();
         }
         catch (IllegalAccessException | InstantiationException | ClassNotFoundException e) {

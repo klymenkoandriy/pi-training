@@ -1,8 +1,8 @@
 package software.sigma.klym;
 
-public class ConverterPlugin implements Converter {
+public class ToLowercaseConverter implements Converter {
 
-    public ConverterPlugin() {
+    public ToLowercaseConverter() {
         System.out.println("    lowercase Converter created...");
     }
 
